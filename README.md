@@ -1,0 +1,1 @@
+# Agricultural-Services-Platform-Django-
