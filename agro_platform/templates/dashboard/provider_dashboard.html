@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="dashboard">
+    <h1>Service Provider Dashboard</h1>
+    <p>Welcome, {{ request.user.username }}</p>
+
+    <div class="dashboard-cards">
+        <div class="card">Assigned Services</div>
+        <div class="card">Service Requests</div>
+        <div class="card">Update Availability</div>
+        <div class="card">Profile Settings</div>
+    </div>
+</div>
+{% endblock %}

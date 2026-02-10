@@ -1,0 +1,50 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{% block title %}AgroAssist{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/platform_base.css' %}">
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar">
+    <div class="logo">AgroAssist</div>
+
+    <ul class="nav-links">
+        <li><a href="/">Home</a></li>
+        {% block back_link %}{% endblock %}
+    </ul>
+
+        <div class="nav-actions">
+        {% if demo %}
+            <span class="demo-label">Demo Mode</span>
+            <a href="{% url 'login' %}" class="btn login">Login</a>
+            <a href="/admin/" class="btn admin">Admin</a>
+        {% elif user.is_authenticated %}
+            {% if user.is_staff or user.is_superuser %}
+                <a href="/admin/" class="btn admin">Admin</a>
+                <a href="/admin/accounts/user/" class="btn admin-link">Users</a>
+                <a href="/admin/auth/group/" class="btn admin-link">Groups</a>
+            {% endif %}
+            <form method="post" action="{% url 'logout' %}">
+                {% csrf_token %}
+                <button class="btn logout">Logout</button>
+            </form>
+        {% else %}
+            <a href="{% url 'login' %}" class="btn login">Login</a>
+            <a href="/admin/" class="btn admin">Admin</a>
+        {% endif %}
+    </div>
+
+</nav>
+
+{% include "includes/demo_logic.html" %}
+
+<!-- CONTENT -->
+<main class="content">
+    {% block content %}{% endblock %}
+</main>
+
+</body>
+</html>

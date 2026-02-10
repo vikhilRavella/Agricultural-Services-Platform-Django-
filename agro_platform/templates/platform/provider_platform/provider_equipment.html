@@ -1,0 +1,24 @@
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/provider_platform.css' %}">
+
+<div class="navbar">
+    <div class="logo">AgroAssist</div>
+    <li><a href="/" class="back-btn" >Home</a></li>
+    <a href="{% url 'provider_platform' %}" class="back-btn" >Back</a>
+</div>
+
+<div class="container">
+    <h1>🚜 Equipment Services</h1>
+
+    <div class="grid">
+        {% for e in equipment %}
+        <div class="card">
+            <h3>{{ e.name }}</h3>
+            <p>₹{{ e.price_per_day }} / day</p>
+            <p>Status: {% if e.available %}Available{% else %}Booked{% endif %}</p>
+        </div>
+        {% empty %}
+        <p>No equipment listed.</p>
+        {% endfor %}
+    </div>
+</div>

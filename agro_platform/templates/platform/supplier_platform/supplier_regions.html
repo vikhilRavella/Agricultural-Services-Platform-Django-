@@ -1,0 +1,33 @@
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/supplier_platform.css' %}">
+
+<div class="navbar">
+    <div class="logo">AgroAssist</div>
+    <li><a href="/" class="back-btn" >Home</a></li>
+    <a href="{% url 'supplier_platform' %}" class="back-btn" >Back</a>
+</div>
+
+<div class="container">
+    <h1>🌐 Regional Market Expansion</h1>
+    <p>
+        Reach farmers in nearby villages and towns by enabling
+        digital visibility for your products.
+    </p>
+
+    <div class="grid">
+        <div class="card">
+            <h3>📍 Nearby Villages</h3>
+            <p>Make your products visible to farmers in surrounding villages.</p>
+        </div>
+
+        <div class="card">
+            <h3>🏘 District Coverage</h3>
+            <p>Expand your supply network across districts digitally.</p>
+        </div>
+
+        <div class="card">
+            <h3>📊 Demand Insights</h3>
+            <p>Understand which regions require more fertilizers and supplies.</p>
+        </div>
+    </div>
+</div>

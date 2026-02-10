@@ -1,0 +1,96 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Supplier Platform | AgroAssist</title>
+    <link rel="stylesheet" href="{% static 'css/supplier.css' %}">
+</head>
+<body>
+
+<!-- ================= NAVBAR ================= -->
+<nav class="navbar">
+    <div class="logo">AgroAssist</div>
+
+    <ul class="nav-links">
+        <li><a href="/">Home</a></li>
+        <li><a href="/api/services/">Marketplace</a></li>
+        <li><a href="#">Orders</a></li>
+    </ul>
+
+        <div class="nav-actions">
+
+    {% if demo %}
+        <div class="demo-alert">
+            ? Demo Mode ? Actions are disabled
+        </div>
+        <a href="{% url 'login' %}" class="btn login">Login</a>
+        <a href="/admin/" class="btn admin">Admin</a>
+
+    {% elif user.is_authenticated %}
+        {% if user.is_staff or user.is_superuser %}
+            <a href="/admin/" class="btn admin">Admin</a>
+            <a href="/admin/accounts/user/" class="btn admin-link">Users</a>
+            <a href="/admin/auth/group/" class="btn admin-link">Groups</a>
+        {% endif %}
+        <form method="post" action="{% url 'logout' %}">
+            {% csrf_token %}
+            <button type="submit" class="btn logout">Logout</button>
+        </form>
+
+    {% else %}
+        <a href="{% url 'login' %}" class="btn login">Login</a>
+        <a href="/admin/" class="btn admin">Admin</a>
+    {% endif %}
+
+</div>
+
+
+</nav>
+
+<!-- ================= HERO SECTION ================= -->
+<section class="hero">
+    <div class="hero-text">
+        <h1>Supplier Management Platform</h1>
+        <p>
+            Digitally manage agricultural products, receive farmer orders,
+            and expand your reach across villages and regions.
+        </p>
+    </div>
+
+    <div class="hero-image">
+        <img src="{% static 'images/supplier.png' %}" alt="Supplier Platform">
+    </div>
+</section>
+
+<!-- ================= SUPPLIER FEATURES ================= -->
+<section class="features">
+    <div class="feature-card">
+        <h3>📦 Product Listings</h3>
+        <p>Add fertilizers, seeds, and materials with pricing and availability.</p>
+        
+        <a href="{% url 'supplier_products' %}">View Products</a>
+    </div>
+
+    <div class="feature-card">
+        <h3>🧾 Order Management</h3>
+        <p>View and process orders placed by farmers in real time.</p>
+        <a href="{% url 'supplier_orders' %}">View Orders</a>
+    </div>
+
+    <div class="feature-card">
+        <h3>📊 Inventory Control</h3>
+        <p>Track stock levels and avoid shortages or over-supply.</p>
+        <a href="{% url 'supplier_inventory' %}">Manage Inventory</a>
+    </div>
+
+    <div class="feature-card">
+        <h3>🌐 Regional Reach</h3>
+        <p>Expand your business digitally to nearby villages and towns.</p>
+        <a href="{% url 'supplier_regions' %}">Manage Regions</a>
+
+    </div>
+</section>
+
+</body>
+</html>

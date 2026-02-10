@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <style>
+        body {
+    background: linear-gradient(120deg, #2e7d32, #81c784);
+    font-family: Segoe UI;
+}
+
+.login-card {
+    background: white;
+    width: 360px;
+    margin: 120px auto;
+    padding: 30px;
+    border-radius: 14px;
+    text-align: center;
+}
+
+.demo-btn {
+    display: block;
+    margin-top: 12px;
+    color: #2e7d32;
+    font-weight: bold;
+}
+
+    </style>
+</head>
+<body>
+
+<div class="login-card">
+    <h1>AgroAssist</h1>
+
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Login</button>
+    </form>
+
+<a href="{% url 'demo_login' %}" class="demo-btn">Continue as Demo</a>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,14 @@
+{% comment %}
+Usage:
+{% include "includes/demo_logic.html" %}
+Provides:
+- demo flag
+- demo alert
+- helper CSS classes
+{% endcomment %}
+
+{% if demo %}
+<div class="demo-alert">
+    ⚠ Demo Mode – Actions are disabled
+</div>
+{% endif %}

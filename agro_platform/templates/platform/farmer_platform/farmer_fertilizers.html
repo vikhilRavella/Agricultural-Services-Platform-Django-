@@ -1,0 +1,45 @@
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/farmer_platform.css' %}">
+
+<!-- ================= NAVBAR ================= -->
+<div class="navbar">
+    <div class="logo">AgroAssist</div>
+
+    <ul class="nav-links">
+        <li><a href="/">Home</a></li>
+        <li><a href="{% url 'farmer_platform' %}">Back</a></li>
+    </ul>
+</div>
+
+{% if demo %}
+<div class="demo-alert">
+    ⚠ Demo Mode – Ordering is disabled
+</div>
+{% endif %}
+
+<!-- ================= CONTENT ================= -->
+<div class="container">
+    <h1 class="page-title">🌱 Fertilizers & Supplies</h1>
+
+    <div class="grid">
+        {% for f in fertilizers %}
+        <div class="card">
+            <h3>{{ f.name }}</h3>
+            <p>Price: ₹{{ f.price }}</p>
+            <p>Stock: {{ f.stock }}</p>
+
+            {% if demo %}
+                <button class="btn-disabled" disabled>
+                    Order (Disabled)
+                </button>
+            {% else %}
+                <button class="btn-primary">
+                    Order Now
+                </button>
+            {% endif %}
+        </div>
+        {% empty %}
+        <p>No fertilizers available.</p>
+        {% endfor %}
+    </div>
+</div>

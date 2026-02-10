@@ -1,0 +1,23 @@
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/supplier_platform.css' %}">
+
+<div class="navbar">
+    <div class="logo">AgroAssist</div>
+    <li><a href="/" class="back-btn" >Home</a></li>
+    <a href="{% url 'supplier_platform' %}" class="back-btn">Back</a>
+</div>
+
+<div class="container">
+    <h1>📊 Inventory Control</h1>
+
+    <div class="grid">
+        {% for product in products %}
+        <div class="card">
+            <h3>{{ product.name }}</h3>
+            <p>Stock Available: {{ product.stock }}</p>
+        </div>
+        {% empty %}
+        <p>No inventory data available.</p>
+        {% endfor %}
+    </div>
+</div>

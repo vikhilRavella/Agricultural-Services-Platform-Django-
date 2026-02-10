@@ -1,0 +1,94 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>AgroAssist | Agricultural Services Platform</title>
+    <link rel="stylesheet" href="{% static 'css/home.css' %}">
+</head>
+<body>
+
+<!-- ================= NAVBAR ================= -->
+<nav class="navbar">
+    <div class="logo">AgroAssist</div>
+
+    <form class="search-form" action="/api/services/" method="get">
+        <input type="search" name="q" placeholder="Search fertilizers, equipment, services...">
+        <button type="submit">🔍</button>
+    </form>
+
+    <div class="nav-actions">
+        {% if demo %}
+            <span class="demo-label">Demo Mode</span>
+            <a href="{% url 'login' %}" class="btn login">Login</a>
+            <a href="/admin/" class="btn admin">Admin</a>
+        {% elif user.is_authenticated %}
+            {% if user.is_staff or user.is_superuser %}
+                <a href="/admin/" class="btn admin">Admin</a>
+                <a href="/admin/accounts/user/" class="btn admin-link">Users</a>
+                <a href="/admin/auth/group/" class="btn admin-link">Groups</a>
+            {% endif %}
+            <form method="post" action="{% url 'logout' %}">
+                {% csrf_token %}
+                <button type="submit" class="btn logout">Logout</button>
+            </form>
+        {% else %}
+            <a href="{% url 'login' %}" class="btn login">Login</a>
+            <a href="/admin/" class="btn admin">Admin</a>
+        {% endif %}
+    </div>
+</nav>
+
+<!-- ================= DEMO BANNER ================= -->
+{% if demo %}
+<div class="demo-banner">
+    ⚠ Demo Mode – Actions are disabled
+</div>
+{% endif %}
+
+<!-- ================= HERO SECTION ================= -->
+<section class="hero">
+    <img src="{% static 'images/hero.png' %}" alt="Agriculture">
+
+    <div class="hero-overlay">
+        <h1>Smart Agricultural Services Platform</h1>
+        <p>
+            Connecting farmers with fertilizers, equipment, skilled workers,
+            and modern agricultural services — all in one place.
+        </p>
+
+        <a href="/api/services/" class="btn hero-btn">
+            Explore Services
+        </a>
+    </div>
+</section>
+
+<!-- ================= PLATFORM INFO ================= -->
+<section class="platform-info">
+
+    <!-- FARMER -->
+<div class="info-card">
+    <h3>🧑‍🌾 Farmers</h3>
+    <p>Access supplies, equipment, and services.</p>
+    <a href="{% url 'farmer_platform' %}">Explore</a>
+</div>
+
+<!-- SUPPLIER -->
+<div class="info-card">
+    <h3>🏪 Suppliers</h3>
+    <p>Sell agricultural products digitally.</p>
+    <a href="{% url 'supplier_platform' %}">Explore</a>
+</div>
+
+<!-- PROVIDER -->
+<div class="info-card">
+    <h3>🚜 Service Providers</h3>
+    <p>Offer equipment and skilled labor.</p>
+    <a href="{% url 'provider_platform' %}">Explore</a>
+</div>
+
+
+</section>
+
+</body>
+</html>

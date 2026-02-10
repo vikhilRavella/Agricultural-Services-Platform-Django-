@@ -1,0 +1,98 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Service Provider Platform | AgroAssist</title>
+    <link rel="stylesheet" href="{% static 'css/provider.css' %}">
+</head>
+<body>
+
+<!-- ================= NAVBAR ================= -->
+<nav class="navbar">
+    <div class="logo">AgroAssist</div>
+
+    <ul class="nav-links">
+        <li><a href="/">Home</a></li>
+        <li><a href="/api/services/">Bookings</a></li>
+        <li><a href="#">Earnings</a></li>
+    </ul>
+
+       <div class="nav-actions">
+
+    {% if demo %}
+        <div class="demo-alert">
+            ? Demo Mode ? Actions are disabled
+        </div>
+        <a href="{% url 'login' %}" class="btn login">Login</a>
+        <a href="/admin/" class="btn admin">Admin</a>
+
+    {% elif user.is_authenticated %}
+        {% if user.is_staff or user.is_superuser %}
+            <a href="/admin/" class="btn admin">Admin</a>
+            <a href="/admin/accounts/user/" class="btn admin-link">Users</a>
+            <a href="/admin/auth/group/" class="btn admin-link">Groups</a>
+        {% endif %}
+        <form method="post" action="{% url 'logout' %}">
+            {% csrf_token %}
+            <button type="submit" class="btn logout">Logout</button>
+        </form>
+
+    {% else %}
+        <a href="{% url 'login' %}" class="btn login">Login</a>
+        <a href="/admin/" class="btn admin">Admin</a>
+    {% endif %}
+
+</div>
+
+
+</nav>
+
+<!-- ================= HERO ================= -->
+<section class="hero">
+    <div class="hero-text">
+        <h1>Service Provider Platform</h1>
+        <p>
+            Offer agricultural services, manage bookings,
+            and support farmers with modern equipment and skilled labor.
+        </p>
+    </div>
+
+    <div class="hero-image">
+        <img src="{% static 'images/provider.png' %}" alt="Service Provider Platform">
+    </div>
+</section>
+
+<!-- ================= PROVIDER FEATURES ================= -->
+<section class="features">
+    <div class="feature-card">
+        <h3>🚜 Equipment Services</h3>
+        <p>List tractors, harvesters, and machinery for booking.</p>
+        <a href="{% url 'provider_equipment' %}">Manage Equipment</a>
+
+    </div>
+
+    <div class="feature-card">
+        <h3>👨‍🌾 Labor Services</h3>
+        <p>Offer skilled agricultural workers to nearby farmers.</p>
+        <a href="{% url 'provider_workers' %}">Manage Workers</a>
+    </div>
+
+    <div class="feature-card">
+        <h3>📅 Booking Schedule</h3>
+        <p>Accept, reject, and manage service bookings.</p>
+        <a href="{% url 'provider_schedule' %}">Manage Schedule</a>
+
+        
+    </div>
+
+    <div class="feature-card">
+        <h3>💰 Earnings & Payments</h3>
+        <p>Track completed jobs and payment history.</p>
+        <a href="{% url 'provider_earnings' %}">Manage Earnings</a>
+
+    </div>
+</section>
+
+</body>
+</html>

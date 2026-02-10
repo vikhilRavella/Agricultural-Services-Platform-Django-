@@ -1,0 +1,24 @@
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/provider_platform.css' %}">
+
+<div class="navbar">
+    <div class="logo">AgroAssist</div>
+    <li><a href="/" class="back-btn" >Home</a></li>
+    <a href="{% url 'provider_platform' %}" class="back-btn" >Back</a>
+</div>
+
+<div class="container">
+    <h1>👨‍🌾 Labor Services</h1>
+
+    <div class="grid">
+        {% for w in workers %}
+        <div class="card">
+            <h3>{{ w.name }}</h3>
+            <p>Skill: {{ w.skill }}</p>
+            <p>Wage: ₹{{ w.daily_wage }}</p>
+        </div>
+        {% empty %}
+        <p>No workers listed.</p>
+        {% endfor %}
+    </div>
+</div>

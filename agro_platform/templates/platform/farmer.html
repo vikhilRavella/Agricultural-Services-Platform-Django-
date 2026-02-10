@@ -1,0 +1,99 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Farmer Platform | AgroAssist</title>
+    <link rel="stylesheet" href="{% static 'css/farmer.css' %}">
+</head>
+<body>
+
+<!-- ================= NAVBAR ================= -->
+<nav class="navbar">
+    <div class="logo">AgroAssist</div>
+
+    <ul class="nav-links">
+        <li><a href="/">Home</a></li>
+        <li><a href="/api/services/">Services</a></li>
+        <li><a href="#">Support</a></li>
+    </ul>
+
+        <div class="nav-actions">
+
+    {% if demo %}
+        <div class="demo-alert">
+            ? Demo Mode ? Actions are disabled
+        </div>
+        <a href="{% url 'login' %}" class="btn login">Login</a>
+        <a href="/admin/" class="btn admin">Admin</a>
+
+    {% elif user.is_authenticated %}
+        {% if user.is_staff or user.is_superuser %}
+            <a href="/admin/" class="btn admin">Admin</a>
+            <a href="/admin/accounts/user/" class="btn admin-link">Users</a>
+            <a href="/admin/auth/group/" class="btn admin-link">Groups</a>
+        {% endif %}
+        <form method="post" action="{% url 'logout' %}">
+            {% csrf_token %}
+            <button type="submit" class="btn logout">Logout</button>
+        </form>
+
+    {% else %}
+        <a href="{% url 'login' %}" class="btn login">Login</a>
+        <a href="/admin/" class="btn admin">Admin</a>
+    {% endif %}
+
+</div>
+
+
+</nav>
+
+<!-- ================= HERO SECTION ================= -->
+<section class="hero">
+    <div class="hero-text">
+        <h1>Farmer Services Platform</h1>
+        <p>
+            Access fertilizers, book equipment, hire skilled workers,
+            and manage agricultural services digitally.
+        </p>
+    </div>
+
+    <div class="hero-image">
+        <img src="{% static 'images/farmer.png' %}" alt="Farmer Platform">
+    </div>
+</section>
+
+<!-- ================= FARMER OPTIONS ================= -->
+<!-- ================= FARMER OPTIONS ================= -->
+<section class="options">
+    <div class="option-card">
+        <h3>🌱 Fertilizers & Supplies</h3>
+        <p>Order fertilizers, seeds, and materials from trusted suppliers.</p>
+        <a href="{% url 'farmer_fertilizers' %}">Explore</a>
+
+    </div>
+
+    <div class="option-card">
+        <h3>🚜 Equipment Booking</h3>
+        <p>Book tractors, harvesters, and machinery on demand.</p>
+        <a href="{% url 'farmer_equipment' %}">Book Now</a>
+
+    </div>
+
+    <div class="option-card">
+        <h3>👷 Skilled Workers</h3>
+        <p>Find skilled agricultural workers and service providers.</p>
+        <a href="{% url 'farmer_workers' %}">Explore Workers</a>
+    </div>
+
+    <div class="option-card">
+        <h3>📅 Service Scheduling</h3>
+        <p>Schedule irrigation, harvesting, and other services.</p>
+        <a href="{% url 'farmer_schedule' %}">Schedule Services</a>
+
+    </div>
+</section>
+
+
+</body>
+</html>
