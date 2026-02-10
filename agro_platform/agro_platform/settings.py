@@ -20,6 +20,9 @@ LOGOUT_REDIRECT_URL = '/'
 
 # ❌ REMOVE any DEMO_MODE_ENABLED logic
 
+ALLOWED_HOSTS = [
+    'agricultural-services-platform-django.onrender.com',
+]
 
 # ================= SECURITY =================
 SECRET_KEY = "django-insecure-h+$3%dwi3p$my#%io*16$yq5saja%$*u=4gq89)x6_u-2@m203"
